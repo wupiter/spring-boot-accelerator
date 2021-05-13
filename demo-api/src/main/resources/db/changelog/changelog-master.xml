@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet id="001-create-todo-table" author="Wupiter">
+        <createTable tableName="todo">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TODO"/>
+            </column>
+            <column name="created_at" type="timestamp with time zone"/>
+            <column name="last_modified_at" type="timestamp with time zone"/>
+            <column name="label" type="VARCHAR(128)"/>
+            <column name="description" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
