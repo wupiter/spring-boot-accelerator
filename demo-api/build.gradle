@@ -6,7 +6,7 @@ plugins {
 	id 'org.hibernate.orm'
 }
 
-group = 'com.example'
+group = 'com.example.demo'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
