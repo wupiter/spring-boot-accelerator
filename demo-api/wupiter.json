@@ -30,7 +30,7 @@
   },
   "files": {
     "hello.html": {
-      "static": false
+      "condition": "false"
     },
     "demo-api/gradle": {
       "static": true
