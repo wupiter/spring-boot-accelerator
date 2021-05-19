@@ -21,11 +21,11 @@
     "pathReplacements": [
       { "target":  "demo-api", "replacement":  "{{appName}}"},
       { "target":  "com/example/demo", "replacement":  "{{strReplace packageName '/'}}"},
-      { "target":  "TodoApplication", "replacement":  "{{capitalize appName}}Application"}
+      { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
     ],
     "textReplacements": [
       { "target":  "package com.example.demo", "replacement":  "package {{packageName}}"},
-      { "target":  "TodoApplication", "replacement":  "{{capitalize appName}}Application"}
+      { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
     ]
   },
   "files": {
