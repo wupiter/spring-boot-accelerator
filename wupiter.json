@@ -4,69 +4,36 @@
   "tags": [ "java", "Spring Boot" ],
   "params": [
     {
-      "name": "name",
+      "name": "appName",
       "type": "text",
-      "description": "Enter your name",
-      "defaultValue": "World",
+      "description": "Ie: example-api",
+      "label": "Application Name",
       "required": true
     },
     {
-      "name": "checked",
-      "type": "checkbox",
-      "description": "Check me",
-      "defaultValue": true,
+      "name": "packageName",
+      "type": "text",
+      "description": "Ie: com.example.app",
       "required": true
-    },
-    {
-      "name": "cool",
-      "type": "radios",
-      "label": "Are you cool?",
-      "defaultValue": "Yes",
-      "values": [ "Yes", { "label": "No", "key": "no" } ],
-      "required": false
-    },
-    {
-      "name": "birthPlace",
-      "type": "searchbox",
-      "label": "Where were you born?",
-      "required": false,
-      "allowMultiple": false,
-      "values": [
-        { "label": "Canada", "key": "CA" },
-        { "label": "Ireland", "key": "IE" },
-        { "label": "United States of America", "key": "US" }
-      ]
-    },
-    {
-      "name": "cities",
-      "type": "searchbox",
-      "label": "Favourite cities?",
-      "required": false,
-      "allowMultiple": true,
-      "values": [
-        {
-          "groupLabel": "Canada",
-          "values": [
-            { "label": "Toronto" },
-            { "label": "Ottawa" },
-            { "label": "Montreal" }
-          ]
-        },
-        {
-          "groupLabel": "US",
-          "values": [
-            { "label": "New York" },
-            { "label": "Washington DC" },
-            { "label": "Philadelphia" }
-          ]
-        }
-      ]
     }
   ],
-  "files": [
-    {
-      "filePath": "hello.html",
-      "static": false
+  "preProcessing": {
+    "pathReplacements": [
+      { "target":  "demo-api", "replacement":  "{{appName}}"},
+      { "target":  "com/example/demo", "replacement":  "{{strReplace packageName '/'}}"},
+      { "target":  "TodoApplication", "replacement":  "{{capitalize appName}}Application"}
+    ],
+    "textReplacements": [
+      { "target":  "package com.example.demo", "replacement":  "package {{packageName}}"},
+      { "target":  "TodoApplication", "replacement":  "{{capitalize appName}}Application"}
+    ]
+  },
+  "files": {
+    "hello.html": {
+      "condition": "false"
+    },
+    "demo-api/gradle": {
+      "static": true
     }
-  ]
+  }
 }
