@@ -24,7 +24,7 @@
       { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
     ],
     "textReplacements": [
-      { "target":  "package com.example.demo", "replacement":  "package {{packageName}}"},
+      { "target":  "com.example.demo", "replacement":  "{{packageName}}"},
       { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
     ]
   },
