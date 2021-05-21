@@ -15,6 +15,16 @@
       "type": "text",
       "description": "ie: com.example.app",
       "required": true
+    },
+    {
+      "name": "sqlDatabase",
+      "type": "select",
+      "defaultValue": "postgresql",
+      "required": true,
+      "values": [
+        { "key": "postgresql", "label": "PostgreSQL"},
+        { "key": "mysql", "label": "MySQL"}
+      ]
     }
   ],
   "preProcessing": {
