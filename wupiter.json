@@ -20,7 +20,7 @@
   "preProcessing": {
     "pathReplacements": [
       { "target":  "demo-api", "replacement":  "{{appName}}"},
-      { "target":  "com/example/demo", "replacement":  "{{strReplace packageName '/'}}"},
+      { "target":  "com/example/demo", "replacement":  "{{strReplace packageName '.' '/'}}"},
       { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
     ],
     "textReplacements": [
