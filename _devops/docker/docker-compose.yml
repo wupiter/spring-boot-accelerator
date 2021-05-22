@@ -30,5 +30,6 @@ services:
     environment:
       MARIADB_USER: dbuser
       MARIADB_PASSWORD: pwd123
+      MARIADB_ROOT_PASSWORD: pwd123
       MARIADB_DATABASE: demo-api
 #{{/ifX}}
