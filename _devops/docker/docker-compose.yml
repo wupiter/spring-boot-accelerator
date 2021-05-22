@@ -2,12 +2,33 @@ version: '3.3'
 
 services:
 
-  db:
+#{{ifX sqlDatabase '==' 'postgres'}}
+  postgres:
     image: postgres
     restart: always
     ports:
         - 5432:5432
     environment:
-      POSTGRES_USER: demouser
+      POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: pwd123
-      POSTGRES_DB: demoapi
+      POSTGRES_DB: demo-api
+#{{/ifX}}
+#{{ifX sqlDatabase '==' 'mysql'}}
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: dbuser
+      MYSQL_ROOT_PASSWORD: pwd123
+      MYSQL_DATABASE: demo-api
+#{{/ifX}}
+#{{ifX sqlDatabase '==' 'mariadb'}}
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_USER: dbuser
+      MARIADB_PASSWORD: pwd123
+      MARIADB_DATABASE: demo-api
+#{{/ifX}}

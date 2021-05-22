@@ -23,7 +23,8 @@
       "required": true,
       "values": [
         { "key": "postgresql", "label": "PostgreSQL"},
-        { "key": "mysql", "label": "MySQL"}
+        { "key": "mysql", "label": "MySQL"},
+        { "key": "mariadb", "label": "MariaDB"}
       ]
     }
   ],
@@ -36,7 +37,8 @@
     "textReplacements": [
       { "target":  "demo-api", "replacement":  "{{appName}}"},
       { "target":  "com.example.demo", "replacement":  "{{packageName}}"},
-      { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"}
+      { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"},
+      { "target":  "#!#", "replacement":  ""}
     ]
   },
   "files": {
