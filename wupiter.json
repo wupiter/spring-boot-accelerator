@@ -1,7 +1,7 @@
 {
   "name": "Spring Boot Accelerator",
-  "description": "Code generator for Spring Boot",
-  "tags": [ "java", "Spring Boot" ],
+  "description": "Code generator for Spring Boot that creates a basic REST api with service and repository layer and uses a database running in a container.",
+  "tags": [ "java", "Spring Boot", "gradle", "docker", "JPA", "postgres", "mysql", "mariadb", "REST" ],
   "params": [
     {
       "name": "appName",
@@ -14,6 +14,16 @@
       "name": "packageName",
       "type": "text",
       "description": "ie: com.example.app",
+      "required": true
+    },
+    {
+      "name": "buildEngine",
+      "type": "radios",
+      "values": [
+        { "key": "gradle", "label": "Gradle" },
+        { "key": "mvn", "label": "Maven" }
+      ],
+      "defaultValue": "gradle",
       "required": true
     },
     {
@@ -45,8 +55,18 @@
     "hello.html": {
       "condition": "false"
     },
+    "demo-api/HELP.md": {
+      "condition": "false"
+    },
     "demo-api/gradle": {
+      "condition": "buildEngine == 'gradle'",
       "static": true
+    },
+    "demo-api/settings.gradle": {
+      "condition": "buildEngine == 'gradle'"
+    },
+    "demo-api/pom.xml": {
+      "condition": "buildEngine == 'mvn'"
     }
   }
 }
