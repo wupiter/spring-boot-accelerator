@@ -33,13 +33,13 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-//{{ifX sqlDatabase '==' 'postgres'}}
+//{{#ifX sqlDatabase '==' 'postgres'}}
 	runtimeOnly 'org.postgresql:postgresql'
 //{{/ifX}}
-//{{ifX sqlDatabase '==' 'mysql'}}
+//{{#ifX sqlDatabase '==' 'mysql'}}
 	runtimeOnly 'mysql:mysql-connector-java'
 //{{/ifX}}
-//{{ifX sqlDatabase '==' 'mariadb'}}
+//{{#ifX sqlDatabase '==' 'mariadb'}}
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
 //{{/ifX}}
 
