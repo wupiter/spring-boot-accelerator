@@ -52,7 +52,7 @@
     ]
   },
   "files": {
-    "hello.html": {
+    "demo-api/hello.html": {
       "condition": "false"
     },
     "demo-api/HELP.md": {
