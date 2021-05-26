@@ -58,14 +58,14 @@
             <scope>runtime</scope>
         </dependency>
         <!--{{/ifX}}-->
-        <!--{{#ifX sqlDatabase '==' 'mariadb'}}-->
+        <!--{{#if (eval sqlDatabase '==' 'mariadb')}}-->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <version>2.7.3</version>
             <scope>runtime</scope>
         </dependency>
-        <!--{{/ifX}}-->
+        <!--{{/if}}-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
