@@ -64,7 +64,7 @@
     ]
   },
   "files": {
-    "demo-api/hello.html": {
+    "hello.html": {
       "condition": "false"
     },
     "demo-api/HELP.md": {
