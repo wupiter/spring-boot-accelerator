@@ -15,10 +15,10 @@
     <name>demo-api</name>
 
     <properties>
-        <!--{{if (eval javaVersion '==' 11)}}-->
+        <!--{{#if (eval javaVersion '==' 11)}}-->
         <java.version>11</java.version>
         <!--{{/if}}-->
-        <!--{{if (eval javaVersion '!=' 11)}}-->
+        <!--{{#if (eval javaVersion '!=' 11)}}-->
         <!--#<java.version>{{javaVersion}}</java.version>#-->
         <!--{{/if}}-->
         <mapstruct.version>1.4.2.Final</mapstruct.version>
