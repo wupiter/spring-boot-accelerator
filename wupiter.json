@@ -28,7 +28,7 @@
     },
     {
       "name": "javaVersion",
-      "type": "radios",
+      "type": "select",
       "values": [
         8, 9, 11, 16
       ],
