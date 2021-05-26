@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
 
-#{{#ifX sqlDatabase '==' 'postgres'}}
+#{{#if (eval sqlDatabase '==' 'postgres')}}
   postgres:
     image: postgres
     restart: always
@@ -12,8 +12,8 @@ services:
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: pwd123
       POSTGRES_DB: demo-api
-#{{/ifX}}
-#{{#ifX sqlDatabase '==' 'mysql'}}
+#{{/if}}
+#{{#if (eval sqlDatabase '==' 'mysql')}}
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -22,8 +22,8 @@ services:
       MYSQL_USER: dbuser
       MYSQL_ROOT_PASSWORD: pwd123
       MYSQL_DATABASE: demo-api
-#{{/ifX}}
-#{{#ifX sqlDatabase '==' 'mariadb'}}
+#{{/if}}
+#{{#if (eval sqlDatabase '==' 'mariadb')}}
   mariadb:
     image: mariadb
     restart: always
@@ -32,4 +32,4 @@ services:
       MARIADB_PASSWORD: pwd123
       MARIADB_ROOT_PASSWORD: pwd123
       MARIADB_DATABASE: demo-api
-#{{/ifX}}
+#{{/if}}
