@@ -7,7 +7,12 @@ plugins {
 
 group = 'com.example.demo'
 version = '0.0.1-SNAPSHOT'
+//{{if (eval javaVersion '==' 11)}}
 sourceCompatibility = '11'
+//{{/if}}
+//{{if (eval javaVersion '!=' 11)}}
+//#sourceCompatibility = '11'
+//{{/if}}
 
 def mapstructVersion = '1.4.2.Final'
 

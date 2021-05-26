@@ -27,6 +27,15 @@
       "required": true
     },
     {
+      "name": "javaVersion",
+      "type": "radios",
+      "values": [
+        8, 9, 11, 16
+      ],
+      "defaultValue": 11,
+      "required": true
+    },
+    {
       "name": "sqlDatabase",
       "type": "select",
       "defaultValue": "postgresql",
@@ -48,7 +57,10 @@
       { "target":  "demo-api", "replacement":  "{{appName}}"},
       { "target":  "com.example.demo", "replacement":  "{{packageName}}"},
       { "target":  "TodoApplication", "replacement":  "{{CamelCase appName}}Application"},
-      { "target":  "#!#", "replacement":  ""}
+      { "target":  "#!#", "replacement":  ""},
+      { "target":  "<!--#", "replacement":  ""},
+      { "target":  "#-->", "replacement":  ""},
+      { "target":  "//#", "replacement":  ""}
     ]
   },
   "files": {
