@@ -62,6 +62,15 @@
       "condition": "buildEngine == 'gradle'",
       "static": true
     },
+    "demo-api/build.gradle": {
+      "condition": "buildEngine == 'gradle'"
+    },
+    "demo-api/gradlew": {
+      "condition": "buildEngine == 'gradle'"
+    },
+    "demo-api/gradlew.bat": {
+      "condition": "buildEngine == 'gradle'"
+    },
     "demo-api/settings.gradle": {
       "condition": "buildEngine == 'gradle'"
     },
