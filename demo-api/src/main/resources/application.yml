@@ -2,7 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-#{{#if (eval sqlDatabase '==' 'mysql')}}
+#{{#if (eval sqlDatabase '==' 'postgres')}}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 #{{/if}}
 #{{#if (eval sqlDatabase '==' 'mysql')}}
@@ -12,7 +12,7 @@ spring:
     #!#database-platform: org.hibernate.dialect.MariaDB103Dialect
 #{{/if}}
   datasource:
-#{{#if (eval sqlDatabase '==' 'mysql')}}
+#{{#if (eval sqlDatabase '==' 'postgres')}}
     url: "jdbc:postgresql://localhost:5432/demo-api"
 #{{/if}}
 #{{#if (eval sqlDatabase '==' 'mysql')}}
