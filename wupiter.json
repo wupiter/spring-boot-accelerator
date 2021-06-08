@@ -38,10 +38,10 @@
     {
       "name": "sqlDatabase",
       "type": "select",
-      "defaultValue": "postgresql",
+      "defaultValue": "postgres",
       "required": true,
       "values": [
-        { "key": "postgresql", "label": "PostgreSQL"},
+        { "key": "postgres", "label": "PostgreSQL"},
         { "key": "mysql", "label": "MySQL"},
         { "key": "mariadb", "label": "MariaDB"}
       ]
