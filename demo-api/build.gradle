@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.0'
+	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'org.hibernate.orm'
@@ -32,6 +32,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.liquibase:liquibase-core'
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'
+//{{/if}}
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 
 	compileOnly 'org.projectlombok:lombok'
@@ -54,6 +59,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.assertj:assertj-core:3.19.0'
 	testImplementation 'com.h2database:h2'
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
+	testImplementation 'org.springframework.security:spring-security-test'
+//{{/if}}
 }
 
 test {

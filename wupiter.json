@@ -43,7 +43,18 @@
       "values": [
         { "key": "postgres", "label": "PostgreSQL"},
         { "key": "mysql", "label": "MySQL"},
-        { "key": "mariadb", "label": "MariaDB"}
+        { "key": "mariadb", "label": "MariaDB"},
+        { "key": "mssql", "label": "SQL Server"}
+      ]
+    },
+    {
+      "name": "authentication_",
+      "type": "select",
+      "defaultValue": "none",
+      "required": true,
+      "values": [
+        { "key": "none", "label": "None"},
+        { "key": "keycloak-jwt", "label": "JWT with Keycloak"}
       ]
     }
   ],
@@ -88,6 +99,18 @@
     },
     "demo-api/pom.xml": {
       "condition": "buildEngine == 'mvn'"
+    },
+    "_devops/docker/keycloak": {
+      "condition": "authentication == 'keycloak-jwt'"
+    },
+    "demo-api/src/main/java/com/example/demo/config/SecurityConfig": {
+      "condition": "authentication == 'keycloak-jwt'"
+    },
+    "demo-api/src/main/java/com/example/demo/config/MethodSecurityConfig": {
+      "condition": "authentication == 'keycloak-jwt'"
+    },
+    "demo-api/src/main/java/com/example/demo/security": {
+      "condition": "authentication == 'keycloak-jwt'"
     }
   }
 }

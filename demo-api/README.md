@@ -17,6 +17,19 @@ The database connection details are found in `<PROJECT_HOME>/src/main/resources/
 ## Database versioning
 This project uses [Liquibase](https://www.liquibase.org/) to version the database changes, see here for the liquibase change-sets config file: `<PROJECT_HOME>/src/main/resources/db.changelog/changelog-master.xml`.
 
+{{#if (eval authentication '==' 'keycloak-jwt')}}
+## Authentication
+The app is using [Keycloak](https://www.keycloak.org/), an open-source Identity and Access Management service for JWT based authentication.
+Running the `docker-compose up` command as described above will also run Keycloak in a docker container.
+
+You can access the admin console at http://localhost:8403/auth.
+
+The docker container is pre-configured with the admin user with `admin/admin` credentials, and it also has a `demo_realm` realm created with a `users` group and a `user01/pwd123`
+user. The realm is imported from the `_devops/docker/keycloak/demo_realm.json` config file.
+
+For further docker configuration for Keycloak, visit https://www.keycloak.org/getting-started/getting-started-docker.
+
+{{/if}}
 ## Spring Data JPA
 The application communicates via the SQL database using [Spring Data JPA](https://spring.io/projects/spring-data-jpa).
 

@@ -1,5 +1,6 @@
 spring:
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: none
 #{{#if (eval sqlDatabase '==' 'postgres')}}
@@ -11,6 +12,9 @@ spring:
 #{{#if (eval sqlDatabase '==' 'mariadb')}}
     #!#database-platform: org.hibernate.dialect.MariaDB103Dialect
 #{{/if}}
+#{{#if (eval sqlDatabase '==' 'mssql')}}
+    #!#database-platform: org.hibernate.dialect.SQLServer2012Dialect
+#{{/if}}
   datasource:
 #{{#if (eval sqlDatabase '==' 'postgres')}}
     url: "jdbc:postgresql://localhost:5432/demo-api"
@@ -21,8 +25,25 @@ spring:
 #{{#if (eval sqlDatabase '==' 'mariadb')}}
     #!#url: "jdbc:mariadb://localhost:3306/demo-api"
 #{{/if}}
+#{{#if (eval sqlDatabase '==' 'mssql')}}
+    #!#url: "jdbc:mssql://localhost:3306/demo-api"
+    #!#username: sa
+#{{/if}}
+#{{#if (eval sqlDatabase '!=' 'mssql')}}
     username: dbuser
+#{{/if}}
     password: pwd123
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml
+
+#{{#if (eval authentication '==' 'keycloak-jwt')}}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8403/auth/realms/demo_realm
+          jwk-set-uri: http://localhost:8403/auth/realms/demo_realm/protocol/openid-connect/certs
+jwt:
+  audience: keycloak
+#{{/if}}

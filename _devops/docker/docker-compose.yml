@@ -33,3 +33,34 @@ services:
       MARIADB_ROOT_PASSWORD: pwd123
       MARIADB_DATABASE: demo-api
 #{{/if}}
+#{{#if (eval sqlDatabase '==' 'mssql')}}
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=pwd123
+      - MSSQL_PID=Developer
+  mssqlscripts:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - mssql
+    command: /bin/bash -c 'until /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "pwd123" -Q "create database demo-api"; do sleep 5; done'
+#{{/if}}
+
+#{{#if (eval authentication '==' 'keycloak-jwt')}}
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    restart: always
+    ports:
+      - 8403:8080
+    volumes:
+      - ./keycloak:/tmp
+    environment:
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/demo_realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
+      DB_VENDOR: h2
+#{{/if}}
