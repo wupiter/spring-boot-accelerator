@@ -93,10 +93,10 @@
     "_devops/docker/keycloak": {
       "condition": "authentication == 'keycloak-jwt'"
     },
-    "demo-api/src/main/java/com/example/demo/config/SecurityConfig": {
+    "demo-api/src/main/java/com/example/demo/config/SecurityConfig.java": {
       "condition": "authentication == 'keycloak-jwt'"
     },
-    "demo-api/src/main/java/com/example/demo/config/MethodSecurityConfig": {
+    "demo-api/src/main/java/com/example/demo/config/MethodSecurityConfig.java": {
       "condition": "authentication == 'keycloak-jwt'"
     },
     "demo-api/src/main/java/com/example/demo/security": {
