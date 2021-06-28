@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "931e2071-9c7c-47f9-b6d3-194d17f0de8a",
-		"name": "Wupiter",
+		"name": "Wupiter - Spring Boot template",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -243,6 +243,101 @@
 						"v1",
 						"todos",
 						"{{todoId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Keycloak Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "demo_app",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user01",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pwd123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{keycloakUrl}}/auth/realms/demo_realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"realms",
+						"demo_realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Keycloak Userinfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{keycloakUrl}}/auth/realms/demo_realm/protocol/openid-connect/userinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"realms",
+						"demo_realm",
+						"protocol",
+						"openid-connect",
+						"userinfo"
 					]
 				}
 			},

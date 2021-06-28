@@ -46,6 +46,16 @@
         { "key": "mariadb", "label": "MariaDB"},
         { "key": "mssql", "label": "SQL Server"}
       ]
+    },
+    {
+      "name": "authentication",
+      "type": "select",
+      "defaultValue": "none",
+      "required": true,
+      "values": [
+        { "key": "none", "label": "None"},
+        { "key": "keycloak-jwt", "label": "JWT with Keycloak"}
+      ]
     }
   ],
   "preProcessing": {

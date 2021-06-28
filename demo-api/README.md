@@ -20,7 +20,7 @@ This project uses [Liquibase](https://www.liquibase.org/) to version the databas
 {{#if (eval authentication '==' 'keycloak-jwt')}}
 ## Authentication
 The app is using [Keycloak](https://www.keycloak.org/), an open-source Identity and Access Management service for JWT based authentication.
-Running the `docker-compose up` command as described above will also run Keycloak in a docker container.
+Running the `docker-compose up` command as described above will also run Keycloak in a docker container (called `keycloak`).
 
 You can access the admin console at http://localhost:8403/auth.
 
@@ -28,6 +28,10 @@ The docker container is pre-configured with the admin user with `admin/admin` cr
 user. The realm is imported from the `_devops/docker/keycloak/demo_realm.json` config file.
 
 For further docker configuration for Keycloak, visit https://www.keycloak.org/getting-started/getting-started-docker.
+
+The realm has a client id `demo-app` configured with a user `user01/pwd123`.
+
+The app uses Spring Security and Spring Security OAuth2 Resource Server libraries for authentication / authorization. See the `SecurityConfig` class and `application.yml` file (config properties under `spring.security` and `app.jwt`) for more details.
 
 {{/if}}
 ## Spring Data JPA

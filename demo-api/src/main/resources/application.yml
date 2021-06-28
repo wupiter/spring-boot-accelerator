@@ -44,6 +44,9 @@ spring:
         jwt:
           issuer-uri: http://localhost:8403/auth/realms/demo_realm
           jwk-set-uri: http://localhost:8403/auth/realms/demo_realm/protocol/openid-connect/certs
-jwt:
-  audience: keycloak
+
+app:
+  jwt:
+    authoritiesClaimName: roles
+    authorityPrefix: ROLE_
 #{{/if}}
