@@ -13,6 +13,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
+//{{#if (eval authentication '==' 'keycloak-jwt'}}
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
+//{{/if}}
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,11 +27,17 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+//{{#if (eval authentication '==' 'keycloak-jwt'}}
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+//{{/if}}
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TodoController.class)
+//{{#if (eval authentication '==' 'keycloak-jwt'}}
+@WithMockUser(username = "john", roles = { "user" })
+//{{/if}}
 class TodoControllerTest {
 
     @Autowired
@@ -46,7 +56,11 @@ class TodoControllerTest {
 
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                .with(csrf())
+                //{{/if}}
+                )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.label").value("My todo"))
@@ -54,11 +68,36 @@ class TodoControllerTest {
         ;
     }
 
+    //{{#if (eval authentication '==' 'keycloak-jwt'}}
+    @Test
+    @WithAnonymousUser
+    void create_MissingUserRole() throws Exception {
+        when(todoService.createTodo(isA(Todo.class))).thenAnswer(answer -> {
+            Todo todo = answer.getArgument(0);
+            todo.setId(UUID.randomUUID().toString());
+            return todo;
+        });
+
+        mockMvc.perform(post("/api/v1/todos")
+                .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                .with(csrf())
+                )
+                .andExpect(status().isUnauthorized())
+        ;
+    }
+    //{{/if}}
+
     @Test
     void create_MissingLabel() throws Exception {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"description\": \"My description\"}")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                .with(csrf())
+                //{{/if}}
+                )
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("The label must not be null"))
         ;
@@ -68,7 +107,11 @@ class TodoControllerTest {
     void create_TooLongLabel() throws Exception {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo is too loooooooooooooooong\", \"description\": \"My description\"}")
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                .with(csrf())
+                //{{/if}}
+                )
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("The label size must be between 1 and 20"))
         ;
@@ -162,7 +205,11 @@ class TodoControllerTest {
 
     @Test
     void deleteById() throws Exception {
-        mockMvc.perform(delete("/api/v1/todos/id-123"))
+        mockMvc.perform(delete("/api/v1/todos/id-123")
+                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                .with(csrf())
+                //{{/if}}
+                )
                 .andExpect(status().isAccepted())
         ;
 
