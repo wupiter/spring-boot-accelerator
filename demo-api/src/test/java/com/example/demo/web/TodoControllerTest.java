@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
-//{{#if (eval authentication '==' 'keycloak-jwt'}}
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 //{{/if}}
@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-//{{#if (eval authentication '==' 'keycloak-jwt'}}
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 //{{/if}}
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -57,7 +57,7 @@ class TodoControllerTest {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 //{{/if}}
                 )
@@ -81,7 +81,7 @@ class TodoControllerTest {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 )
                 .andExpect(status().isUnauthorized())
@@ -94,7 +94,7 @@ class TodoControllerTest {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 //{{/if}}
                 )
@@ -108,7 +108,7 @@ class TodoControllerTest {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo is too loooooooooooooooong\", \"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 //{{/if}}
                 )
@@ -206,7 +206,7 @@ class TodoControllerTest {
     @Test
     void deleteById() throws Exception {
         mockMvc.perform(delete("/api/v1/todos/id-123")
-                //{{#if (eval authentication '==' 'keycloak-jwt'}}
+                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 //{{/if}}
                 )
