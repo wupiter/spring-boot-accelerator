@@ -111,6 +111,9 @@
     },
     "demo-api/src/main/java/com/example/demo/security": {
       "condition": "authentication == 'keycloak-jwt'"
+    },
+    "demo-api/src/test/postman/Keycloak OAuth2.postman_collection.json": {
+      "condition": "authentication == 'keycloak-jwt'"
     }
   }
 }
