@@ -1,7 +1,7 @@
 {
   "name": "Spring Boot Accelerator",
   "description": "Code generator for Spring Boot that creates a basic REST api with service and repository layer and uses a database running in a container.",
-  "tags": [ "java", "Spring Boot", "gradle", "docker", "JPA", "postgres", "mysql", "mariadb", "REST" ],
+  "tags": [ "java", "Spring Boot", "gradle", "docker", "JPA", "postgres", "mysql", "mariadb", "REST", "JWT", "Keycloak" ],
   "params": [
     {
       "name": "appName",
