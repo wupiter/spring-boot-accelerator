@@ -31,7 +31,9 @@ For further docker configuration for Keycloak, visit https://www.keycloak.org/ge
 
 The realm has a client id `demo-app` configured with a user `user01/pwd123`.
 
-The app uses Spring Security and Spring Security OAuth2 Resource Server libraries for authentication / authorization. See the `SecurityConfig` class and `application.yml` file (config properties under `spring.security` and `app.jwt`) for more details.
+The app uses Spring Security and Spring Security OAuth2 Resource Server libraries for authentication / authorization. See the `SecurityConfig` and `MethodSecurityConfig` classes and `application.yml` file (config properties under `spring.security` and `app.jwt`) for more details on the configuration.
+
+Finally, the `TodoController` class is configured to require 'user' role for all endpoints declared within the controller and `TodoControllerTest` class is updated to support role-based authorization. 
 
 {{/if}}
 ## Spring Data JPA
