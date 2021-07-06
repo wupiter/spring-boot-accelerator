@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-//{{#if (eval authentication '==' 'keycloak-jwt'}}
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
 import org.springframework.security.access.prepost.PreAuthorize;
 //{{/if}}
 import org.springframework.util.StringUtils;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/v1/todos", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-//{{#if (eval authentication '==' 'keycloak-jwt'}}
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
 @PreAuthorize("hasRole('user')")
 //{{/if}}
 public class TodoController {

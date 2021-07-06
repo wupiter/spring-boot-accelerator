@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TodoController.class)
-//{{#if (eval authentication '==' 'keycloak-jwt'}}
+//{{#if (eval authentication '==' 'keycloak-jwt')}}
 @WithMockUser(username = "john", roles = { "user" })
 //{{/if}}
 class TodoControllerTest {
@@ -68,7 +68,7 @@ class TodoControllerTest {
         ;
     }
 
-    //{{#if (eval authentication '==' 'keycloak-jwt'}}
+    //{{#if (eval authentication '==' 'keycloak-jwt')}}
     @Test
     @WithAnonymousUser
     void create_MissingUserRole() throws Exception {
