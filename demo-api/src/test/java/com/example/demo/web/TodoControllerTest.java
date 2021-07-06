@@ -81,7 +81,6 @@ class TodoControllerTest {
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
-                //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
                 )
                 .andExpect(status().isUnauthorized())
