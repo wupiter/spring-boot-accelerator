@@ -1,7 +1,10 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private String authoritiesClaimName;
     @Value("${app.jwt.authorityPrefix}")
     private String authorityPrefix;
+    @Autowired
+    private Environment env;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,11 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .authenticated()
                     .anyRequest()
                         .anonymous()
-            .and()
+        ;
+
+        if (!env.acceptsProfiles(Profiles.of("test"))) {
+            http
                 .oauth2ResourceServer()
                     .jwt()
                         .decoder(jwtDecoder())
-        ;
+            ;
+        }
     }
 
     JwtDecoder jwtDecoder() {

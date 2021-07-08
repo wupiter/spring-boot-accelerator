@@ -5,6 +5,7 @@ import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.invocation.InvocationOnMock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,10 +14,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
-//{{#if (eval authentication '==' 'keycloak-jwt')}}
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-//{{/if}}
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,12 +31,14 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 //{{/if}}
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TodoController.class)
+@ActiveProfiles("test")
 //{{#if (eval authentication '==' 'keycloak-jwt')}}
-@WithMockUser(username = "john", roles = { "user" })
+@WithMockUser(username = "john", roles = "user")
 //{{/if}}
 class TodoControllerTest {
 
@@ -46,13 +48,15 @@ class TodoControllerTest {
     @MockBean
     private TodoService todoService;
 
+    private Object returnTodoParamWithId(InvocationOnMock answer) {
+        Todo todo = answer.getArgument(0);
+        todo.setId(UUID.randomUUID().toString());
+        return todo;
+    }
+
     @Test
     void create_Success() throws Exception {
-        when(todoService.createTodo(isA(Todo.class))).thenAnswer(answer -> {
-            Todo todo = answer.getArgument(0);
-            todo.setId(UUID.randomUUID().toString());
-            return todo;
-        });
+        when(todoService.createTodo(isA(Todo.class))).thenAnswer(this::returnTodoParamWithId);
 
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
@@ -72,18 +76,14 @@ class TodoControllerTest {
     @Test
     @WithAnonymousUser
     void create_MissingUserRole() throws Exception {
-        when(todoService.createTodo(isA(Todo.class))).thenAnswer(answer -> {
-            Todo todo = answer.getArgument(0);
-            todo.setId(UUID.randomUUID().toString());
-            return todo;
-        });
+        when(todoService.createTodo(isA(Todo.class))).thenAnswer(this::returnTodoParamWithId);
 
         mockMvc.perform(post("/api/v1/todos")
                 .content("{\"label\": \"My todo\", \"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(csrf())
-                )
-                .andExpect(status().isUnauthorized())
+        )
+                .andExpect(status().isForbidden())
         ;
     }
     //{{/if}}
