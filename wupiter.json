@@ -75,10 +75,7 @@
     ]
   },
   "files": {
-    "hello.html": {
-      "condition": "false"
-    },
-    "demo-api/HELP.md": {
+    "README.md": {
       "condition": "false"
     },
     "demo-api/gradle": {
