@@ -45,13 +45,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .anonymous()
         ;
 
-        if (!env.acceptsProfiles(Profiles.of("test"))) {
+        if (!isTestProfileActive()) {
             http
                 .oauth2ResourceServer()
                     .jwt()
                         .decoder(jwtDecoder())
             ;
         }
+    }
+
+    private boolean isTestProfileActive() {
+        return env.acceptsProfiles(Profiles.of("test"));
     }
 
     JwtDecoder jwtDecoder() {
