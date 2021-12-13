@@ -79,38 +79,38 @@
       "condition": "false"
     },
     "demo-api/gradle": {
-      "condition": "buildEngine == 'gradle'",
+      "condition": "buildEngine '==' 'gradle'",
       "static": true
     },
     "demo-api/build.gradle": {
-      "condition": "buildEngine == 'gradle'"
+      "condition": "buildEngine '==' 'gradle'"
     },
     "demo-api/gradlew": {
-      "condition": "buildEngine == 'gradle'"
+      "condition": "buildEngine '==' 'gradle'"
     },
     "demo-api/gradlew.bat": {
-      "condition": "buildEngine == 'gradle'"
+      "condition": "buildEngine '==' 'gradle'"
     },
     "demo-api/settings.gradle": {
-      "condition": "buildEngine == 'gradle'"
+      "condition": "buildEngine '==' 'gradle'"
     },
     "demo-api/pom.xml": {
-      "condition": "buildEngine == 'mvn'"
+      "condition": "buildEngine '==' 'mvn'"
     },
     "_devops/docker/keycloak": {
-      "condition": "authentication == 'keycloak-jwt'"
+      "condition": "authentication '==' 'keycloak-jwt'"
     },
     "demo-api/src/main/java/com/example/demo/config/SecurityConfig.java": {
-      "condition": "authentication == 'keycloak-jwt'"
+      "condition": "authentication '==' 'keycloak-jwt'"
     },
     "demo-api/src/main/java/com/example/demo/config/MethodSecurityConfig.java": {
-      "condition": "authentication == 'keycloak-jwt'"
+      "condition": "authentication '==' 'keycloak-jwt'"
     },
     "demo-api/src/main/java/com/example/demo/security": {
-      "condition": "authentication == 'keycloak-jwt'"
+      "condition": "authentication '==' 'keycloak-jwt'"
     },
     "demo-api/src/test/postman/Keycloak OAuth2.postman_collection.json": {
-      "condition": "authentication == 'keycloak-jwt'"
+      "condition": "authentication '==' 'keycloak-jwt'"
     }
   }
 }
