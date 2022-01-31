@@ -1,23 +1,22 @@
 {
-  "name": "Spring Boot Accelerator",
-  "description": "Code generator for Spring Boot that creates a basic REST api with service and repository layer and uses a database running in a container.",
-  "tags": [ "java", "Spring Boot", "gradle", "docker", "JPA", "postgres", "mysql", "mariadb", "REST", "JWT", "Keycloak" ],
-  "params": [
-    {
-      "name": "appName",
+  "info": {
+    "name": "Spring Boot Accelerator",
+    "description": "Code generator for Spring Boot that creates a basic REST api with service and repository layer and uses a database running in a container.",
+    "tags": [ "java", "Spring Boot", "gradle", "docker", "JPA", "postgres", "mysql", "mariadb", "REST", "JWT", "Keycloak" ]
+  },
+  "params": {
+    "appName": {
       "type": "text",
       "description": "ie: example-api",
       "label": "Application Name",
       "required": true
     },
-    {
-      "name": "packageName",
+    "packageName": {
       "type": "text",
       "description": "ie: com.example.app",
       "required": true
     },
-    {
-      "name": "buildEngine",
+    "buildEngine": {
       "type": "radios",
       "values": [
         { "key": "gradle", "label": "Gradle" },
@@ -26,8 +25,7 @@
       "defaultValue": "gradle",
       "required": true
     },
-    {
-      "name": "javaVersion",
+    "javaVersion": {
       "type": "select",
       "values": [
         8, 9, 11, 16
@@ -35,8 +33,7 @@
       "defaultValue": 11,
       "required": true
     },
-    {
-      "name": "sqlDatabase",
+    "sqlDatabase": {
       "type": "select",
       "defaultValue": "postgres",
       "required": true,
@@ -47,8 +44,7 @@
         { "key": "mssql", "label": "SQL Server"}
       ]
     },
-    {
-      "name": "authentication",
+    "authentication": {
       "type": "select",
       "defaultValue": "none",
       "required": true,
@@ -57,7 +53,7 @@
         { "key": "keycloak-jwt", "label": "JWT with Keycloak"}
       ]
     }
-  ],
+  },
   "preProcessing": {
     "pathReplacements": [
       { "target":  "demo-api", "replacement":  "{{appName}}"},
