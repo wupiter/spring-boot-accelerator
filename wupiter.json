@@ -9,11 +9,13 @@
       "type": "text",
       "description": "ie: example-api",
       "label": "Application Name",
+      "defaultValue": "demo-service",
       "required": true
     },
     "packageName": {
       "type": "text",
       "description": "ie: com.example.app",
+      "defaultValue": "com.demo",
       "required": true
     },
     "buildEngine": {
