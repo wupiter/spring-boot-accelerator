@@ -105,11 +105,11 @@
       "condition": "buildEngine '==' 'mvn'",
       "static": true
     },
-    "demo-api/mvnw": {
+    "demo-api/mvnw.cmd": {
       "condition": "buildEngine '==' 'mvn'",
       "static": true
     },
-    "demo-api/mvnw.cmd": {
+    "demo-api/mvnw": {
       "condition": "buildEngine '==' 'mvn'",
       "static": true
     },
