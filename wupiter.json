@@ -109,6 +109,10 @@
       "condition": "buildEngine '==' 'mvn'",
       "static": true
     },
+    "demo-api/mvnw.cmd": {
+      "condition": "buildEngine '==' 'mvn'",
+      "static": true
+    },
     "demo-api/pom.xml": {
       "condition": "buildEngine '==' 'mvn'"
     },
