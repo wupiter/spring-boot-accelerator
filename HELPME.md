@@ -57,3 +57,14 @@ Automated tests are located under `<PROJECT_HOME>/src/test/java` with unit tests
 [MapStruct](https://mapstruct.org/) makes it easy to convert between different java beans (ie: entities and other, simple POJOs).
 
 For more details, see basic usage in the `TodoMapper` interface.
+
+# Code Quality checks
+
+{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+## Checkstyle
+[Checkstyle](https://checkstyle.org/) is available as both a Gradle and a Maven plugin and it can validate if the code is adhering to our coding standards.
+
+A custom checkstyle configuration file is available at `demo-api/checkstyle.xml`.
+
+For more details on configuring checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
+{{/if}}

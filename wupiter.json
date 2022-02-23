@@ -37,7 +37,7 @@
     },
     "codeQualityTools": {
       "type": "searchbox",
-      "label": "Select static code analysis tools to use",
+      "description": "Select static code analysis tools to use",
       "required": false,
       "allowMultiple": true,
       "values": [
