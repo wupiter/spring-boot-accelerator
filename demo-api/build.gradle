@@ -2,6 +2,9 @@ plugins {
 	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+//{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+	id 'checkstyle'
+//{{/if}}
 	id 'org.hibernate.orm'
 }
 
@@ -67,6 +70,18 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+//{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+checkstyle {
+	configFile = file("${rootDir}/checkstyle.xml")
+}
+checkstyleMain {
+	source ='src/main/java'
+}
+checkstyleTest {
+	source ='src/test/java'
+}
+//{{/if}}
 
 bootBuildImage {
 	imageName = 'demo-api:0.0.1-SNAPSHOT'

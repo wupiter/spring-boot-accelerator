@@ -35,6 +35,15 @@
       "defaultValue": 11,
       "required": true
     },
+    "codeQualityTools": {
+      "type": "searchbox",
+      "label": "Select static code analysis tools to use",
+      "required": false,
+      "allowMultiple": true,
+      "values": [
+        { "label": "Checkstyle", "key": "checkstyle" }
+      ]
+    },
     "sqlDatabase": {
       "type": "select",
       "defaultValue": "postgres",
@@ -92,8 +101,19 @@
     "demo-api/settings.gradle": {
       "condition": "buildEngine '==' 'gradle'"
     },
+    "demo-api/.mvn": {
+      "condition": "buildEngine '==' 'mvn'",
+      "static": true
+    },
+    "demo-api/mvnw": {
+      "condition": "buildEngine '==' 'mvn'",
+      "static": true
+    },
     "demo-api/pom.xml": {
       "condition": "buildEngine '==' 'mvn'"
+    },
+    "demo-api/checkstyle.xml": {
+      "condition": "'checkstyle' 'in' codeQualityTools"
     },
     "_devops/docker/keycloak": {
       "condition": "authentication '==' 'keycloak-jwt'"

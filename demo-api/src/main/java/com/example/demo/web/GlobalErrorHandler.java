@@ -19,17 +19,21 @@ public class GlobalErrorHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        String message = String.format("The %s %s", e.getFieldError().getField(), e.getFieldError().getDefaultMessage());
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException e) {
+        String message = String.format("The %s %s",
+                e.getFieldError().getField(), e.getFieldError().getDefaultMessage());
         return buildErrorResponse(HttpStatus.BAD_REQUEST, message, e);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error. Please try again", e);
+        return buildErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error. Please try again", e);
     }
 
-    private ResponseEntity<ErrorResponse> buildErrorResponse(HttpStatus httpStatus, String message, Exception e) {
+    private ResponseEntity<ErrorResponse> buildErrorResponse(
+            HttpStatus httpStatus, String message, Exception e) {
         log.error("Failed to process request - HTTP {} - {}", httpStatus.value(), message, e);
         return ResponseEntity
                 .status(httpStatus)

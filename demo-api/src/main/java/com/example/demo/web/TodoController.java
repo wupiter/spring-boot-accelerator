@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.model.ErrorResponse;
 import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 //{{/if}}
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/v1/todos", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,13 +40,17 @@ public class TodoController {
     }
 
     private ResponseEntity<?> createNotFoundResponse(String id) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No todo found with id " + id));
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("No todo found with id " + id));
     }
 
     @GetMapping("")
     public Page<Todo> findTodos(@RequestParam(required = false) String label,
                                 Pageable pageable) {
-        return StringUtils.hasText(label) ? todoService.findByLabel(label, pageable) : todoService.findAll(pageable);
+        return StringUtils.hasText(label)
+                ? todoService.findByLabel(label, pageable)
+                : todoService.findAll(pageable);
     }
 
     @DeleteMapping(ID_PATH)

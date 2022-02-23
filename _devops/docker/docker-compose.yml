@@ -64,3 +64,14 @@ services:
       KEYCLOAK_IMPORT: /tmp/demo_realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
       DB_VENDOR: h2
 #{{/if}}
+
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins
+    restart: always
+    ports:
+      - 8180:8080
+    volumes:
+      - ./keycloak:/tmp
+    environment:
+      KEYCLOAK_USER: admin

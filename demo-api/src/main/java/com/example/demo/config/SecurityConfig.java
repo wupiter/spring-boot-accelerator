@@ -33,10 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .cors()
-//                    .disable()
+            //      .disable()
             .and()
                 .csrf()
-//                    .disable()
+            //      .disable()
             .and()
                 .authorizeRequests()
                     .antMatchers("/api/**")
@@ -70,10 +70,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
+                new JwtGrantedAuthoritiesConverter();
         jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(authoritiesClaimName);
         jwtGrantedAuthoritiesConverter.setAuthorityPrefix(authorityPrefix);
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+        jwtAuthenticationConverter
+                .setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
     }
 }
