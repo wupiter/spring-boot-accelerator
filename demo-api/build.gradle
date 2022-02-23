@@ -5,6 +5,9 @@ plugins {
 //{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
 	id 'checkstyle'
 //{{/if}}
+//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+	id 'jacoco'
+//{{/if}}
 	id 'org.hibernate.orm'
 }
 
@@ -69,7 +72,15 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+	finalizedBy jacocoTestReport
+//{{/if}}
 }
+//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+jacocoTestReport {
+	dependsOn test
+}
+//{{/if}}
 
 //{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
 checkstyle {

@@ -62,9 +62,18 @@ For more details, see basic usage in the `TodoMapper` interface.
 
 {{#if (eval 'checkstyle' 'in' codeQualityTools)}}
 ## Checkstyle
-[Checkstyle](https://checkstyle.org/) is available as both a Gradle and a Maven plugin and it can validate if the code is adhering to our coding standards.
+[Checkstyle](https://checkstyle.org/) is an open-source tool available as both Gradle and Maven plugins. It can validate if the code is adhering to our coding standards.
 
 A custom checkstyle configuration file is available at `demo-api/checkstyle.xml`.
 
 For more details on configuring checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
+{{/if}}
+
+{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+## JaCoCo
+[JaCoCo](https://www.eclemma.org/jacoco/) is an open-source code coverage tool available as both Gradle and Maven plugins.
+
+For more details on JaCoCo, see below links:
+* https://www.baeldung.com/jacoco
+* https://docs.gradle.org/current/userguide/jacoco_plugin.html
 {{/if}}
