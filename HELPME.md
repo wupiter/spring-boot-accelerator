@@ -66,12 +66,26 @@ For more details, see basic usage in the `TodoMapper` interface.
 
 A custom checkstyle configuration file is available at `demo-api/checkstyle.xml`.
 
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew checkstyleMain` in the `demo-api` folder to generate checkstyle report under `demo-api/build/reports/checkstyle`.
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw checkstyle:checkstyle` in the `demo-api` folder to generate the checkstyle report at `demo-api/target/site/checkstyle.html`.
+{{/if}}
+
 For more details on configuring checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
 {{/if}}
 
 {{#if (eval 'jacoco' 'in' codeQualityTools)}}
 ## JaCoCo
 [JaCoCo](https://www.eclemma.org/jacoco/) is an open-source code coverage tool available as both Gradle and Maven plugins.
+
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew test jacocoTestReport` in the `demo-api` folder to run unit tests and generate the code coverage report under `demo-api/build/reports/jacoco`. 
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw test jacoco:report` in the `demo-api` folder to run unit tests and generate the code coverage report under `demo-api/target/site/jacoco`.
+{{/if}}
 
 For more details on JaCoCo, see below links:
 * https://www.baeldung.com/jacoco
