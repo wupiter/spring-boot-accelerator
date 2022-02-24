@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.1'
+	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 //{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
@@ -7,6 +7,9 @@ plugins {
 //{{/if}}
 //{{#if (eval 'jacoco' 'in' codeQualityTools)}}
 	id 'jacoco'
+//{{/if}}
+//{{#if (eval 'owasp' 'in' codeQualityTools)}}
+	id 'org.owasp.dependencycheck' version '6.5.3'
 //{{/if}}
 	id 'org.hibernate.orm'
 }

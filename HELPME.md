@@ -91,3 +91,19 @@ For more details on JaCoCo, see below links:
 * https://www.baeldung.com/jacoco
 * https://docs.gradle.org/current/userguide/jacoco_plugin.html
 {{/if}}
+
+{{#if (eval 'owasp' 'in' codeQualityTools)}}
+## OWASP vulnerability
+[OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) is an open-source Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
+
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew dependencyCheckAnalyze` in the `demo-api` folder to generate the vulnerability report at `demo-api/build/reports/dependency-check-report.html`.
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw dependency-check:check` in the `demo-api` folder to generate the vulnerability report at `demo-api/target/dependency-check-report.html`.
+{{/if}}
+
+For more details on JaCoCo, see below links:
+* https://plugins.gradle.org/plugin/org.owasp.dependencycheck
+* https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
+{{/if}}

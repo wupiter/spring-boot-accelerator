@@ -41,8 +41,9 @@
       "required": false,
       "allowMultiple": true,
       "values": [
-        { "label": "Checkstyle", "key": "checkstyle" },
-        { "label": "JaCoCo code coverage", "key": "jacoco" }
+        { "label": "Checkstyle coding standards", "key": "checkstyle" },
+        { "label": "JaCoCo code coverage", "key": "jacoco" },
+        { "label": "OWASP vulnerability check", "key": "owasp" }
       ]
     },
     "sqlDatabase": {
