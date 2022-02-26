@@ -70,8 +70,8 @@ See here for more details: https://developer.okta.com/blog/2019/12/20/five-tools
 [Checkstyle](https://checkstyle.org/) is an open-source tool available as both Gradle and Maven plugins. It can validate if the code is adhering to our coding standards.
 
 A custom checkstyle configuration file is available at `demo-api/checkstyle.xml`.
-
 {{#if (eval buildEngine '==' 'gradle')}}
+
 Run `./gradlew checkstyleMain` in the `demo-api` folder to generate checkstyle report under `demo-api/build/reports/checkstyle`.
 {{/if}}
 {{#if (eval buildEngine '==' 'mvn')}}
@@ -80,8 +80,8 @@ Run `./mvnw checkstyle:checkstyle` in the `demo-api` folder to generate the chec
 
 For more details on configuring Checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
 {{/if}}
-
 {{#if (eval 'jacoco' 'in' codeQualityTools)}}
+
 ## JaCoCo
 [JaCoCo](https://www.eclemma.org/jacoco/) is an open-source code coverage tool available as both Gradle and Maven plugins.
 
@@ -96,8 +96,8 @@ For more details on JaCoCo, see below links:
 * https://www.baeldung.com/jacoco
 * https://docs.gradle.org/current/userguide/jacoco_plugin.html
 {{/if}}
-
 {{#if (eval 'owasp' 'in' codeQualityTools)}}
+
 ## OWASP vulnerability
 [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) is an open-source Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
 
@@ -112,12 +112,14 @@ For more details on OWASP Dependency Check, see below links:
 * https://plugins.gradle.org/plugin/org.owasp.dependencycheck
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 {{/if}}
-
 {{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+
 ## Spotbugs
 [Spotbugs](https://spotbugs.github.io/) is an open-source program which uses static analysis to look for bugs in Java code.
 
 The project also has the [Find Security Bugs](http://h3xstream.github.io/find-sec-bugs/) Spotbugs plugin configured.
+
+Use the custom `com.example.demo.utils.spotbugs.SuppressFBWarnings` annotation to suppress any Spotbugs warnings.
 
 {{#if (eval buildEngine '==' 'gradle')}}
 Run `./gradlew dependencyCheckAnalyze` in the `demo-api` folder to generate the vulnerability report at `demo-api/build/reports/dependency-check-report.html`.
