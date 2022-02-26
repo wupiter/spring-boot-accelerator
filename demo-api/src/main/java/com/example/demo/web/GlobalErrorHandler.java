@@ -2,13 +2,14 @@ package com.example.demo.web;
 
 import com.example.demo.error.ApiException;
 import com.example.demo.model.ErrorResponse;
+import com.example.demo.utils.spotbugs.SuppressFBWarnings;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Slf4j
 @ControllerAdvice
@@ -21,8 +22,10 @@ public class GlobalErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {
-        String message = String.format("The %s %s",
-                e.getFieldError().getField(), e.getFieldError().getDefaultMessage());
+        String message = Optional.ofNullable(e.getFieldError())
+                .map(fieldError -> String.format("The %s %s",
+                        fieldError.getField(), fieldError.getDefaultMessage()))
+                .orElse(e.getMessage());
         return buildErrorResponse(HttpStatus.BAD_REQUEST, message, e);
     }
 
@@ -32,6 +35,7 @@ public class GlobalErrorHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error. Please try again", e);
     }
 
+    @SuppressFBWarnings("CRLF_INJECTION_LOGS")
     private ResponseEntity<ErrorResponse> buildErrorResponse(
             HttpStatus httpStatus, String message, Exception e) {
         log.error("Failed to process request - HTTP {} - {}", httpStatus.value(), message, e);

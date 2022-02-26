@@ -3,6 +3,8 @@ package com.example.demo.web;
 import com.example.demo.error.NotFoundApiException;
 import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
+import java.util.Collections;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.invocation.InvocationOnMock;
@@ -19,9 +21,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Collections;
-import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.isA;
@@ -105,7 +104,8 @@ class TodoControllerTest {
     @Test
     void create_TooLongLabel() throws Exception {
         mockMvc.perform(post("/api/v1/todos")
-                .content("{\"label\": \"My todo is too loooooooooooooooong\", \"description\": \"My description\"}")
+                .content("{\"label\": \"My todo is too loooooooooooooooong\", "
+                        + "\"description\": \"My description\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 //{{#if (eval authentication '==' 'keycloak-jwt')}}
                 .with(csrf())
@@ -141,7 +141,8 @@ class TodoControllerTest {
 
     @Test
     void getById_NotFound() throws Exception {
-        when(todoService.getById("id-not-exists")).thenThrow(new NotFoundApiException("Todo not found"));
+        when(todoService.getById("id-not-exists"))
+                .thenThrow(new NotFoundApiException("Todo not found"));
 
         mockMvc.perform(get("/api/v1/todos/id-not-exists")
                 .accept(MediaType.APPLICATION_JSON))

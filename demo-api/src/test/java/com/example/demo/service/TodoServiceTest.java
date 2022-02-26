@@ -5,6 +5,8 @@ import com.example.demo.error.NotFoundApiException;
 import com.example.demo.mapper.TodoMapper;
 import com.example.demo.model.Todo;
 import com.example.demo.repository.TodoRepository;
+import java.util.Collections;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,9 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-
-import java.util.Collections;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -75,7 +74,8 @@ class TodoServiceTest {
     @Test
     void findAll() {
         PageRequest pageable = PageRequest.of(0, 1);
-        PageImpl<TodoEntity> page = new PageImpl<>(Collections.singletonList(TODO_ENTITY), pageable, 2);
+        PageImpl<TodoEntity> page = new PageImpl<>(
+                Collections.singletonList(TODO_ENTITY), pageable, 2);
 
         when(todoRepository.findAll(pageable)).thenReturn(page);
         when(todoMapper.fromEntity(TODO_ENTITY)).thenReturn(TODO);
@@ -89,7 +89,8 @@ class TodoServiceTest {
     void findByLabel() {
         String label = "My Label";
         PageRequest pageable = PageRequest.of(0, 1);
-        PageImpl<TodoEntity> page = new PageImpl<>(Collections.singletonList(TODO_ENTITY), pageable, 2);
+        PageImpl<TodoEntity> page = new PageImpl<>(
+                Collections.singletonList(TODO_ENTITY), pageable, 2);
 
         when(todoRepository.findByLabel(label, pageable)).thenReturn(page);
         when(todoMapper.fromEntity(TODO_ENTITY)).thenReturn(TODO);

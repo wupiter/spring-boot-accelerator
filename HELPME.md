@@ -46,6 +46,10 @@ The project uses [Lombok](https://projectlombok.org/) that auto-generates byteco
 
 To use Lombok in IntelliJ install the `Lombok` plugin and enable Settings -> Enable annotation processing. 
 
+See below links for more details:
+= https://www.baeldung.com/intro-to-project-lombok
+- https://www.baeldung.com/lombok-configuration-system
+
 # Error handling
 
 The app has its own exception `ApiException`, which is handled by and translated to an error response (among with other common Spring exceptions) by the `GlobalErrorHandler` class.
@@ -59,6 +63,7 @@ Automated tests are located under `<PROJECT_HOME>/src/test/java` with unit tests
 For more details, see basic usage in the `TodoMapper` interface.
 
 # Code Quality checks
+See here for more details: https://developer.okta.com/blog/2019/12/20/five-tools-improve-java.
 
 {{#if (eval 'checkstyle' 'in' codeQualityTools)}}
 ## Checkstyle
@@ -73,7 +78,7 @@ Run `./gradlew checkstyleMain` in the `demo-api` folder to generate checkstyle r
 Run `./mvnw checkstyle:checkstyle` in the `demo-api` folder to generate the checkstyle report at `demo-api/target/site/checkstyle.html`.
 {{/if}}
 
-For more details on configuring checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
+For more details on configuring Checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
 {{/if}}
 
 {{#if (eval 'jacoco' 'in' codeQualityTools)}}
@@ -103,7 +108,25 @@ Run `./gradlew dependencyCheckAnalyze` in the `demo-api` folder to generate the 
 Run `./mvnw dependency-check:check` in the `demo-api` folder to generate the vulnerability report at `demo-api/target/dependency-check-report.html`.
 {{/if}}
 
-For more details on JaCoCo, see below links:
+For more details on OWASP Dependency Check, see below links:
+* https://plugins.gradle.org/plugin/org.owasp.dependencycheck
+* https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
+{{/if}}
+
+{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+## Spotbugs
+[Spotbugs](https://spotbugs.github.io/) is an open-source program which uses static analysis to look for bugs in Java code.
+
+The project also has the [Find Security Bugs](http://h3xstream.github.io/find-sec-bugs/) Spotbugs plugin configured.
+
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew dependencyCheckAnalyze` in the `demo-api` folder to generate the vulnerability report at `demo-api/build/reports/dependency-check-report.html`.
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw dependency-check:check` in the `demo-api` folder to generate the vulnerability report at `demo-api/target/dependency-check-report.html`.
+{{/if}}
+
+For more details on Spotbugs, see below links:
 * https://plugins.gradle.org/plugin/org.owasp.dependencycheck
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 {{/if}}

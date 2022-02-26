@@ -11,7 +11,9 @@ plugins {
 //{{#if (eval 'owasp' 'in' codeQualityTools)}}
 	id 'org.owasp.dependencycheck' version '6.5.3'
 //{{/if}}
-	id 'org.hibernate.orm'
+//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+	id 'com.github.spotbugs' version '5.0.3'
+//{{/if}}
 }
 
 group = 'com.example.demo'
@@ -71,6 +73,10 @@ dependencies {
 //{{#if (eval authentication '==' 'keycloak-jwt')}}
 	testImplementation 'org.springframework.security:spring-security-test'
 //{{/if}}
+//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+
+	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.10.1'
+//{{/if}}
 }
 
 test {
@@ -96,16 +102,12 @@ checkstyleTest {
 	source ='src/test/java'
 }
 //{{/if}}
+//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+spotbugs {
+	toolVersion = '4.5.2'
+}
+//{{/if}}
 
 bootBuildImage {
 	imageName = 'demo-api:0.0.1-SNAPSHOT'
-}
-
-hibernate {
-	enhance {
-		enableLazyInitialization = true
-		enableDirtyTracking = true
-		enableAssociationManagement = true
-		enableExtendedEnhancement = false
-	}
 }
