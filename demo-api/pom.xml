@@ -156,7 +156,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!--{{#if (eval 'checkstyle' 'in' codeQualityTools)}}-->
+            <!--{{#if (eval 'checkstyle' 'in' features)}}-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -179,7 +179,7 @@
                 </executions>
             </plugin>
             <!--{{/if}}-->
-            <!--{{#if (eval 'jacoco' 'in' codeQualityTools)}}-->
+            <!--{{#if (eval 'jacoco' 'in' features)}}-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -200,7 +200,7 @@
                 </executions>
             </plugin>
             <!--{{/if}}-->
-            <!--{{#if (eval 'owasp' 'in' codeQualityTools)}}-->
+            <!--{{#if (eval 'owasp' 'in' features)}}-->
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -217,7 +217,7 @@
                 </executions>
             </plugin>
             <!--{{/if}}-->
-            <!--{{#if (eval 'spotbugs' 'in' codeQualityTools)}}-->
+            <!--{{#if (eval 'spotbugs' 'in' features)}}-->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -231,6 +231,47 @@
                         </plugin>
                     </plugins>
                 </configuration>
+            </plugin>
+            <!--{{/if}}-->
+            <!--{{#if (eval 'pmd' 'in' features)}}-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.16.0</version>
+                <configuration>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pmd-scan</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--{{/if}}-->
+            <!--{{#if (eval 'japicmp' 'in' features)}}-->
+            <plugin>
+                <groupId>com.github.siom79.japicmp</groupId>
+                <artifactId>japicmp-maven-plugin</artifactId>
+                <version>0.15.6</version>
+                <configuration>
+                    <parameter>
+                        <!-- see documentation -->
+                        <ignoreMissingOldVersion>true</ignoreMissingOldVersion>
+                        <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
+                    </parameter>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>cmp</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!--{{/if}}-->
         </plugins>

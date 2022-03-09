@@ -65,7 +65,7 @@ For more details, see basic usage in the `TodoMapper` interface.
 # Code Quality checks
 See here for more details: https://developer.okta.com/blog/2019/12/20/five-tools-improve-java.
 
-{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+{{#if (eval 'checkstyle' 'in' features)}}
 ## Checkstyle
 [Checkstyle](https://checkstyle.org/) is an open-source tool available as both Gradle and Maven plugins. It can validate if the code is adhering to our coding standards.
 
@@ -80,7 +80,7 @@ Run `./mvnw checkstyle:checkstyle` in the `demo-api` folder to generate the chec
 
 For more details on configuring Checkstyle, see https://www.vogella.com/tutorials/Checkstyle/article.html.
 {{/if}}
-{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+{{#if (eval 'jacoco' 'in' features)}}
 
 ## JaCoCo
 [JaCoCo](https://www.eclemma.org/jacoco/) is an open-source code coverage tool available as both Gradle and Maven plugins.
@@ -96,7 +96,7 @@ For more details on JaCoCo, see below links:
 * https://www.baeldung.com/jacoco
 * https://docs.gradle.org/current/userguide/jacoco_plugin.html
 {{/if}}
-{{#if (eval 'owasp' 'in' codeQualityTools)}}
+{{#if (eval 'owasp' 'in' features)}}
 
 ## OWASP vulnerability
 [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/) is an open-source Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
@@ -112,23 +112,49 @@ For more details on OWASP Dependency Check, see below links:
 * https://plugins.gradle.org/plugin/org.owasp.dependencycheck
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 {{/if}}
-{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+{{#if (eval 'spotbugs' 'in' features)}}
 
 ## Spotbugs
-[Spotbugs](https://spotbugs.github.io/) is an open-source program which uses static analysis to look for bugs in Java code.
-
-The project also has the [Find Security Bugs](http://h3xstream.github.io/find-sec-bugs/) Spotbugs plugin configured.
-
-Use the custom `com.example.demo.utils.spotbugs.SuppressFBWarnings` annotation to suppress any Spotbugs warnings.
+[Spotbugs](https://spotbugs.github.io/) is an open-source program which uses static analysis to look for bugs in the compiled Java byte code.
 
 {{#if (eval buildEngine '==' 'gradle')}}
-Run `./gradlew dependencyCheckAnalyze` in the `demo-api` folder to generate the vulnerability report at `demo-api/build/reports/dependency-check-report.html`.
+Run `./gradlew spotbugsMain` in the `demo-api` folder to generate the bugs report in the console output.
 {{/if}}
 {{#if (eval buildEngine '==' 'mvn')}}
-Run `./mvnw dependency-check:check` in the `demo-api` folder to generate the vulnerability report at `demo-api/target/dependency-check-report.html`.
+Run `./mvnw spotbugs:check` in the `demo-api` folder to generate the bugs report in the console output.
 {{/if}}
 
 For more details on Spotbugs, see below links:
-* https://plugins.gradle.org/plugin/org.owasp.dependencycheck
+* https://spotbugs.readthedocs.io/en/latest/gradle.html
+* https://spotbugs.readthedocs.io/en/latest/maven.html
+{{/if}}
+
+## PMD
+[PMD](https://pmd.github.io/) is an open-source program which uses static analysis to look for bugs in Java source code.
+
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew pmdMain` in the `demo-api` folder to generate the bugs report at `demo-api/build/reports/pmd/main.html`.
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw spotbugs:check` in the `demo-api` folder to generate the bugs report at `demo-api/target/site/pmd.html`.
+{{/if}}
+
+For more details on Spotbugs, see below links:
+* https://docs.gradle.org/current/userguide/pmd_plugin.html
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
+{{/if}}
+
+## JApiCmp
+[JApiCmp](https://siom79.github.io/japicmp/) is an open-source tool to compare two versions of a jar archive.
+
+{{#if (eval buildEngine '==' 'gradle')}}
+Run `./gradlew pmdMain` in the `demo-api` folder to generate the bugs report at `demo-api/build/reports/pmd/main.html`.
+{{/if}}
+{{#if (eval buildEngine '==' 'mvn')}}
+Run `./mvnw spotbugs:check` in the `demo-api` folder to generate the bugs report at `demo-api/target/site/pmd.html`.
+{{/if}}
+
+For more details on Spotbugs, see below links:
+* https://github.com/melix/japicmp-gradle-plugin
+* https://siom79.github.io/japicmp/MavenPlugin.html
 {{/if}}

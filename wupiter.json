@@ -35,16 +35,18 @@
       "defaultValue": 11,
       "required": true
     },
-    "codeQualityTools": {
+    "features": {
       "type": "searchbox",
-      "description": "Select static code analysis tools to use",
+      "description": "Select features like static code analysis tools, etc.",
       "required": false,
       "allowMultiple": true,
       "values": [
         { "label": "Checkstyle coding standards", "key": "checkstyle" },
         { "label": "JaCoCo code coverage", "key": "jacoco" },
         { "label": "OWASP vulnerability check", "key": "owasp" },
-        { "label": "Spotbugs check for bugs", "key": "spotbugs" }
+        { "label": "Spotbugs check for bugs", "key": "spotbugs" },
+        { "label": "PMD check for bugs", "key": "pmd" },
+        { "label": "japicmp check for backwards compatibility", "key": "japicmp" }
       ]
     },
     "sqlDatabase": {
@@ -120,7 +122,7 @@
       "condition": "buildEngine '==' 'mvn'"
     },
     "demo-api/checkstyle.xml": {
-      "condition": "'checkstyle' 'in' codeQualityTools"
+      "condition": "'checkstyle' 'in' features"
     },
     "_devops/docker/keycloak": {
       "condition": "authentication '==' 'keycloak-jwt'"
@@ -138,7 +140,7 @@
       "condition": "authentication '==' 'keycloak-jwt'"
     },
     "demo-api/src/main/java/com/demo/utils/spotbugs/SuppressFBWarnings.java": {
-      "condition": "'spotbugs' 'in' codeQualityTools"
+      "condition": "'spotbugs' 'in' features"
     }
   }
 }

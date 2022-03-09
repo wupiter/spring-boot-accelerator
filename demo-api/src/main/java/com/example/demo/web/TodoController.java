@@ -2,7 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
-//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+//{{#if (eval 'spotbugs' 'in' features)}}
 import com.example.demo.utils.spotbugs.SuppressFBWarnings;
 //{{/if}}
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/todos", produces = MediaType.APPLICATION_JSON_VALUE)
-//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+//{{#if (eval 'spotbugs' 'in' features)}}
 @SuppressFBWarnings({"EI_EXPOSE_REP2", "SPRING_ENDPOINT"})
 //{{/if}}
 @RequiredArgsConstructor

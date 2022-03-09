@@ -2,17 +2,23 @@ plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-//{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+//{{#if (eval 'checkstyle' 'in' features)}}
 	id 'checkstyle'
 //{{/if}}
-//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+//{{#if (eval 'jacoco' 'in' features)}}
 	id 'jacoco'
 //{{/if}}
-//{{#if (eval 'owasp' 'in' codeQualityTools)}}
+//{{#if (eval 'owasp' 'in' features)}}
 	id 'org.owasp.dependencycheck' version '6.5.3'
 //{{/if}}
-//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+//{{#if (eval 'spotbugs' 'in' features)}}
 	id 'com.github.spotbugs' version '5.0.3'
+//{{/if}}
+//{{#if (eval 'pmd' 'in' features)}}
+	id 'pmd'
+//{{/if}}
+//{{#if (eval 'japicmp' 'in' features)}}
+	id 'me.champeau.gradle.japicmp' version '0.3.1'
 //{{/if}}
 }
 
@@ -73,7 +79,7 @@ dependencies {
 //{{#if (eval authentication '==' 'keycloak-jwt')}}
 	testImplementation 'org.springframework.security:spring-security-test'
 //{{/if}}
-//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+//{{#if (eval 'spotbugs' 'in' features)}}
 
 	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.10.1'
 //{{/if}}
@@ -81,17 +87,17 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+//{{#if (eval 'jacoco' 'in' features)}}
 	finalizedBy jacocoTestReport
 //{{/if}}
 }
-//{{#if (eval 'jacoco' 'in' codeQualityTools)}}
+//{{#if (eval 'jacoco' 'in' features)}}
 jacocoTestReport {
 	dependsOn test
 }
 //{{/if}}
 
-//{{#if (eval 'checkstyle' 'in' codeQualityTools)}}
+//{{#if (eval 'checkstyle' 'in' features)}}
 checkstyle {
 	configFile = file("${rootDir}/checkstyle.xml")
 }
@@ -102,7 +108,7 @@ checkstyleTest {
 	source ='src/test/java'
 }
 //{{/if}}
-//{{#if (eval 'spotbugs' 'in' codeQualityTools)}}
+//{{#if (eval 'spotbugs' 'in' features)}}
 spotbugs {
 	toolVersion = '4.5.2'
 }
