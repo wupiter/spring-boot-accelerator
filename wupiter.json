@@ -35,20 +35,6 @@
       "defaultValue": 11,
       "required": true
     },
-    "features": {
-      "type": "searchbox",
-      "description": "Select features like static code analysis tools, etc.",
-      "required": false,
-      "allowMultiple": true,
-      "values": [
-        { "label": "Checkstyle coding standards", "key": "checkstyle" },
-        { "label": "JaCoCo code coverage", "key": "jacoco" },
-        { "label": "OWASP vulnerability check", "key": "owasp" },
-        { "label": "Spotbugs check for bugs", "key": "spotbugs" },
-        { "label": "PMD check for bugs", "key": "pmd" },
-        { "label": "japicmp check for backwards compatibility", "key": "japicmp" }
-      ]
-    },
     "sqlDatabase": {
       "type": "select",
       "defaultValue": "postgres",
@@ -67,6 +53,20 @@
       "values": [
         { "key": "none", "label": "None"},
         { "key": "keycloak-jwt", "label": "JWT with Keycloak"}
+      ]
+    },
+    "features": {
+      "type": "searchbox",
+      "description": "Select features like static code analysis tools, etc.",
+      "required": false,
+      "allowMultiple": true,
+      "values": [
+        { "label": "Checkstyle coding standards", "key": "checkstyle" },
+        { "label": "JaCoCo code coverage", "key": "jacoco" },
+        { "label": "OWASP vulnerability check", "key": "owasp" },
+        { "label": "Spotbugs check for bugs", "key": "spotbugs" },
+        { "label": "PMD check for bugs", "key": "pmd" },
+        { "label": "japicmp check for backwards compatibility", "key": "japicmp" }
       ]
     }
   },
