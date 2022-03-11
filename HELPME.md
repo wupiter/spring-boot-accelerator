@@ -128,6 +128,7 @@ For more details on Spotbugs, see below links:
 * https://spotbugs.readthedocs.io/en/latest/gradle.html
 * https://spotbugs.readthedocs.io/en/latest/maven.html
 {{/if}}
+{{#if (eval 'pmd' 'in' features)}}
 
 ## PMD
 [PMD](https://pmd.github.io/) is an open-source program which uses static analysis to look for bugs in Java source code.
@@ -143,6 +144,7 @@ For more details on Spotbugs, see below links:
 * https://docs.gradle.org/current/userguide/pmd_plugin.html
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 {{/if}}
+{{#if (eval 'japicmp' 'in' features)}}
 
 ## JApiCmp
 [JApiCmp](https://siom79.github.io/japicmp/) is an open-source tool to compare two versions of a jar archive.
