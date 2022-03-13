@@ -252,28 +252,6 @@
                 </executions>
             </plugin>
             <!--{{/if}}-->
-            <!--{{#if (eval 'japicmp' 'in' features)}}-->
-            <plugin>
-                <groupId>com.github.siom79.japicmp</groupId>
-                <artifactId>japicmp-maven-plugin</artifactId>
-                <version>0.15.6</version>
-                <configuration>
-                    <parameter>
-                        <!-- see documentation -->
-                        <ignoreMissingOldVersion>true</ignoreMissingOldVersion>
-                        <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
-                    </parameter>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>cmp</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--{{/if}}-->
         </plugins>
     </build>
 </project>

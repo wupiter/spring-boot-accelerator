@@ -17,9 +17,6 @@ plugins {
 //{{#if (eval 'pmd' 'in' features)}}
 	id 'pmd'
 //{{/if}}
-//{{#if (eval 'japicmp' 'in' features)}}
-	id 'me.champeau.gradle.japicmp' version '0.3.1'
-//{{/if}}
 }
 
 group = 'com.example.demo'

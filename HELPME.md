@@ -144,19 +144,3 @@ For more details on Spotbugs, see below links:
 * https://docs.gradle.org/current/userguide/pmd_plugin.html
 * https://jeremylong.github.io/DependencyCheck/dependency-check-maven/
 {{/if}}
-{{#if (eval 'japicmp' 'in' features)}}
-
-## JApiCmp
-[JApiCmp](https://siom79.github.io/japicmp/) is an open-source tool to compare two versions of a jar archive.
-
-{{#if (eval buildEngine '==' 'gradle')}}
-Run `./gradlew pmdMain` in the `demo-api` folder to generate the bugs report at `demo-api/build/reports/pmd/main.html`.
-{{/if}}
-{{#if (eval buildEngine '==' 'mvn')}}
-Run `./mvnw spotbugs:check` in the `demo-api` folder to generate the bugs report at `demo-api/target/site/pmd.html`.
-{{/if}}
-
-For more details on Spotbugs, see below links:
-* https://github.com/melix/japicmp-gradle-plugin
-* https://siom79.github.io/japicmp/MavenPlugin.html
-{{/if}}
