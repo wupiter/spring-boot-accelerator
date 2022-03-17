@@ -40,6 +40,27 @@ Finally, the `TodoController` class is configured to require 'user' role for all
 The application communicates via the SQL database using [Spring Data JPA](https://spring.io/projects/spring-data-jpa).
 
 Use the `JPA Buddy` IntelliJ plugin to generate liquibase change-sets from JPA entities
+{{#if (eval 'kafka' 'in' features)}}
+
+# Kafka integration with Spring Cloud Stream
+[Spring Cloud Stream](https://spring.io/projects/spring-cloud-stream) is a Spring framework for building event-driven microservices. Spring Cloud Stream has a [Kafka binder](https://github.com/spring-cloud/spring-cloud-stream-binder-kafka) that we're using in this app.
+
+It uses the `spring-cloud-starter-stream-kafka` dependency, and it's configured using the `StreamingConfig` class and the `spring.cloud.stream.xyz` config properties in the `application.yml` file.
+
+Start local Zookeeper (needed by [Kafka](https://kafka.apache.org/)) using below command:
+```
+cd <PROJECT_HOME>/_devops/docker
+docker-compose up zookeeper
+```
+
+Start local Kafka using:
+```
+cd <PROJECT_HOME>/_devops/docker
+docker-compose up kafka
+```
+
+Sample code to send/receive messages using Kafka is at `TodoStreamingService` and `TodoController#send()`.
+{{/if}}
 
 # Lombok
 The project uses [Lombok](https://projectlombok.org/) that auto-generates bytecode for getters, setters, logger, etc. 

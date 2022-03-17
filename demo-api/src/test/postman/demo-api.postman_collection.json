@@ -222,7 +222,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
+							"pm.test(\"Status code is 202\", function () {",
 							"    pm.response.to.have.status(202);",
 							"});"
 						],
@@ -243,6 +243,48 @@
 						"v1",
 						"todos",
 						"{{todoId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Todo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"label\": \"todo {{$randomInt}}\",\n    \"description\": \"something {{$randomLoremWord}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/todos/send",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"todos",
+						"send"
 					]
 				}
 			},

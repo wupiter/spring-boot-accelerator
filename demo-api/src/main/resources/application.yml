@@ -44,7 +44,32 @@ spring:
         jwt:
           issuer-uri: http://localhost:8403/auth/realms/demo_realm
           jwk-set-uri: http://localhost:8403/auth/realms/demo_realm/protocol/openid-connect/certs
+#{{/if}}
 
+#{{#if (eval 'kafka 'in' features)}}
+  cloud:
+    stream:
+      function:
+        definition: consume;supply;
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: true
+      bindings:
+        consume-in-0:
+          binder: kafka
+          destination: todo_topic
+          contentType: application/json
+          group: demo-api
+          consumer:
+            concurrency: 10
+        supply-out-0:
+          binder: kafka
+          destination: todo_topic
+          contentType: application/json
+#{{/if}}
+
+#{{#if (eval authentication '==' 'keycloak-jwt')}}
 app:
   jwt:
     authoritiesClaimName: roles

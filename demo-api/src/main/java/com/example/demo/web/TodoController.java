@@ -2,6 +2,9 @@ package com.example.demo.web;
 
 import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
+//{{#if (eval 'kafka' 'in' features)}}
+import com.example.demo.service.TodoStreamService;
+//{{/if}}
 //{{#if (eval 'spotbugs' 'in' features)}}
 import com.example.demo.utils.spotbugs.SuppressFBWarnings;
 //{{/if}}
@@ -32,6 +35,9 @@ public class TodoController {
     private static final String ID_PATH = "/{id}";
 
     private final TodoService todoService;
+//{{#if (eval 'kafka' 'in' features)}}
+    private final TodoStreamService todoStreamService;
+//{{/if}}
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Todo create(@Valid @RequestBody Todo todo) {
@@ -57,4 +63,12 @@ public class TodoController {
     public void deleteById(@PathVariable String id) {
         todoService.deleteById(id);
     }
+
+//{{#if (eval 'kafka' 'in' features)}}
+    @PostMapping(value = "/send", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void send(@Valid @RequestBody Todo todo) {
+        todoStreamService.sendMessage(todo);
+    }
+//{{/if}}
 }

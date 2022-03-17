@@ -21,8 +21,25 @@
         <!--{{#if (eval javaVersion '!=' 11)}}-->
         <!--#<java.version>{{javaVersion}}</java.version>#-->
         <!--{{/if}}-->
+        <!--{{#if (eval 'kafka' 'in' features)}}-->
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <!--{{/if}}-->
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
+
+    <!--{{#if (eval 'kafka' 'in' features)}}-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <!--{{/if}}-->
 
     <dependencies>
         <dependency>
@@ -37,6 +54,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!--{{#if (eval 'kafka' 'in' features)}}-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+        </dependency>
+        <!--{{/if}}-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
