@@ -46,7 +46,7 @@ spring:
           jwk-set-uri: http://localhost:8403/auth/realms/demo_realm/protocol/openid-connect/certs
 #{{/if}}
 
-#{{#if (eval 'kafka 'in' features)}}
+#{{#if (eval 'kafka' 'in' features)}}
   cloud:
     stream:
       function:
