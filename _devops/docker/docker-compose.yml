@@ -78,7 +78,7 @@ services:
       KEYCLOAK_USER: admin
 #{{/if}}
 
-#{{#if (eval 'kafka 'in' 'features')}}
+#{{#if (eval 'kafka' 'in' features)}}
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
