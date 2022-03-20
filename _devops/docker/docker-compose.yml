@@ -65,7 +65,7 @@ services:
       DB_VENDOR: h2
 #{{/if}}
 
-#{{#if (eval 'jenkins 'in' features)}}
+#{{#if (eval 'jenkins' 'in' features)}}
   jenkins:
     image: jenkins/jenkins:lts-jdk11
     container_name: jenkins
