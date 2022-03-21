@@ -30,7 +30,7 @@
     "javaVersion": {
       "type": "select",
       "values": [
-        8, 9, 11, 16
+        8, 9, 11, 16, 17
       ],
       "defaultValue": 11,
       "required": true
