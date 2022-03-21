@@ -66,7 +66,7 @@
         { "label": "OWASP vulnerability check", "key": "owasp" },
         { "label": "Spotbugs check for bugs", "key": "spotbugs" },
         { "label": "PMD check for bugs", "key": "pmd" },
-        { "label": "Kafka using Spring Cloud Stream", "key": "kafka" }
+        { "label": "Kafka with Spring Cloud Stream", "key": "kafka" }
       ]
     }
   },
